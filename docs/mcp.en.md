@@ -167,6 +167,8 @@ PINs must have 4–16 digits. Passwords support 4–64 printable ASCII character
 
 Credentials are encrypted locally and never sent to models, computers or logs. These tools reject all arguments. A credential attempt is persisted before input: failure, timeout, cancellation or process interruption blocks subsequent attempts (`attempt_blocked`) until the credential is checked and saved again on the phone. Toggling permission or restarting the app does not reset this protection.
 
+`credential_kind_mismatch` means the locally stored credential kind differs from the recognized lock-screen field. The response includes `stored_kind` and `detected_kind` (`pin` or `password`). Re-enter the credential on the phone using the actual lock-screen method, including after changing that method in Android settings. This status submits no credential and does not latch an attempt. Unrecognized fields still return `unsupported_keyguard`.
+
 Other statuses include `disabled`, `helper_unavailable`, `credential_required`, and `unlock_failed`. Success is based on Android state, not the input command exit code. Unlock the phone manually once after reboot; this feature does not enable remote access before the first unlock, change system lock credentials, or approve task payments/confirmations.
 
 ## Security
